@@ -1,3 +1,4 @@
 release/* filter=lfs diff=lfs merge=lfs -text
 scratch/* filter=lfs diff=lfs merge=lfs -text
 node_modules/* filter=lfs diff=lfs merge=lfs -text
+release/** filter=lfs diff=lfs merge=lfs -text
