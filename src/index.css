@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import "tailwindcss" source(none);
+@source "./";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oxanium", sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NEURION OS · DEEP NEURAL INTERFACE · 2026
+   Color DNA extracted from logo: Navy #0b1628 + Electric Blue #3b82f6
+═══════════════════════════════════════════════════════════════════ */
+:root {
+  --navy-900:    #04090f;
+  --navy-800:    #060d1a;
+  --navy-700:    #0b1628;
+  --navy-600:    #0f1e38;
+  --navy-500:    #152745;
+  --navy-400:    #1c3459;
+
+  --blue-vivid:  #2563eb;
+  --blue-core:   #3b82f6;
+  --blue-mid:    #60a5fa;
+  --blue-soft:   #93c5fd;
+  --blue-glow:   #bfdbfe;
+
+  --cyan-hot:    #06b6d4;
+  --cyan-bright: #22d3ee;
+
+  --bg-base:       var(--navy-900);
+  --bg-surface:    var(--navy-800);
+  --bg-elevated:   var(--navy-700);
+  --bg-hover:      var(--navy-600);
+  --bg-card:       rgba(9, 16, 30, 0.85);
+  --bg-glass:      rgba(15, 30, 56, 0.55);
+
+  --border-subtle:  rgba(59, 130, 246, 0.07);
+  --border-medium:  rgba(59, 130, 246, 0.18);
+  --border-strong:  rgba(59, 130, 246, 0.35);
+  --border-glow:    rgba(59, 130, 246, 0.6);
+
+  --text-primary:   #e2efff;
+  --text-secondary: #6da0d8;
+  --text-muted:     #2a4875;
+  --text-bright:    #ffffff;
+
+  --accent-blue:    #3b82f6;
+  --accent-cyan:    #22d3ee;
+  --accent-amber:   #f59e0b;
+  --accent-green:   #10b981;
+  --accent-rose:    #f43f5e;
+  --accent-violet:  #8b5cf6;
+  --accent-indigo:  #6366f1;
+  --plan-color:     #4F46E5;
+  --plan-color-soft: rgba(79,70,229,0.16);
+  --plan-color-border: rgba(79,70,229,0.38);
+  --plan-logo-color: #60a5fa;
+  --plan-logo-glow: rgba(96,165,250,0.45);
+
+  --glow-blue-sm:   0 0 12px rgba(59,130,246,0.35);
+  --glow-blue-md:   0 0 30px rgba(59,130,246,0.25), 0 0 60px rgba(59,130,246,0.1);
+  --glow-blue-lg:   0 0 60px rgba(59,130,246,0.2), 0 0 120px rgba(59,130,246,0.08);
+  --glow-cyan:      0 0 20px rgba(34,211,238,0.3);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ─── COSMIC BACKGROUND ──────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 55% at 15% -5%, rgba(29,78,216,0.13) 0%, transparent 62%),
+    radial-gradient(ellipse 70% 45% at 85% 105%, rgba(6,182,212,0.09) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(37,99,235,0.04) 0%, transparent 100%);
+  animation: auroraDrift 20s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 30%, transparent 100%);
+  animation: gridPulse 10s ease-in-out infinite;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--blue-vivid), var(--cyan-bright));
+  border-radius: 10px;
+}
+::selection { background: rgba(59,130,246,0.32); color: #fff; }
+
+/* ─── NEURION CARD ───────────────────────────────────────────────── */
+.neurion-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(59,130,246,0.05);
+  backdrop-filter: blur(14px);
+  transition: border-color 0.28s, box-shadow 0.28s, transform 0.28s;
+  position: relative;
+  overflow: hidden;
+}
+.neurion-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(59,130,246,0.035) 0%, transparent 55%);
+  pointer-events: none;
+}
+.neurion-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 10px 50px rgba(0,0,0,0.65), var(--glow-blue-sm), inset 0 1px 0 rgba(59,130,246,0.1);
+  transform: translateY(-1px);
+}
+
+/* ─── NEURION TAB ────────────────────────────────────────────────── */
+.neurion-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 13px;
+  border-radius: 9px;
+  font-size: 11.5px; font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  white-space: nowrap;
+  color: rgba(180, 215, 255, 0.82);
+  background: transparent;
+  overflow: hidden;
+}
+.neurion-tab:hover {
+  color: #e2efff;
+  background: rgba(59,130,246,0.09);
+  border-color: var(--border-subtle);
+}
+.neurion-tab.active {
+  color: var(--text-bright);
+  background: rgba(59,130,246,0.14);
+  border-color: rgba(96,165,250,0.34);
+  box-shadow: 0 0 22px rgba(59,130,246,0.14), inset 0 1px 0 rgba(255,255,255,0.07), inset 0 0 14px rgba(59,130,246,0.12);
+}
+.neurion-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+  animation: tabUnderline 2.2s ease-in-out infinite;
+}
+
+.neurion-tab.active-amber  { color: #fcd34d; background: rgba(245,158,11,0.1);  border-color: rgba(245,158,11,0.28); }
+.neurion-tab.active-amber::after  { background: linear-gradient(90deg, transparent, #f59e0b, transparent); }
+.neurion-tab.active-cyan   { color: #67e8f9; background: rgba(34,211,238,0.1);  border-color: rgba(34,211,238,0.28); }
+.neurion-tab.active-cyan::after   { background: linear-gradient(90deg, transparent, #22d3ee, transparent); }
+.neurion-tab.active-rose   { color: #fda4af; background: rgba(244,63,94,0.1);   border-color: rgba(244,63,94,0.28); }
+.neurion-tab.active-rose::after   { background: linear-gradient(90deg, transparent, #f43f5e, transparent); }
+.neurion-tab.active-violet { color: #c4b5fd; background: rgba(139,92,246,0.1);  border-color: rgba(139,92,246,0.28); }
+.neurion-tab.active-violet::after { background: linear-gradient(90deg, transparent, #8b5cf6, transparent); }
+.neurion-tab.active-green  { color: #6ee7b7; background: rgba(16,185,129,0.1);  border-color: rgba(16,185,129,0.28); }
+.neurion-tab.active-green::after  { background: linear-gradient(90deg, transparent, #10b981, transparent); }
+.neurion-tab.active-indigo { color: #a5b4fc; background: rgba(99,102,241,0.1);  border-color: rgba(99,102,241,0.28); }
+.neurion-tab.active-indigo::after { background: linear-gradient(90deg, transparent, #6366f1, transparent); }
+.neurion-tab.active-teal   { color: #5eead4; background: rgba(20,184,166,0.1);  border-color: rgba(20,184,166,0.28); }
+
+.neurion-tab .tab-dot {
+  position: absolute; top: 5px; right: 5px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--blue-mid);
+  box-shadow: 0 0 8px var(--blue-core), 0 0 14px rgba(59,130,246,0.4);
+  animation: tabDotPulse 1.8s ease-in-out infinite;
+}
+
+/* ─── BUTTONS ────────────────────────────────────────────────────── */
+.neurion-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 11px; border: none;
+  background: linear-gradient(135deg, var(--plan-color), #1d4ed8);
+  color: #fff; font-weight: 700; font-size: 13px;
+  font-family: var(--font-sans);
+  cursor: pointer; transition: all 0.22s;
+  box-shadow: 0 4px 20px rgba(37,99,235,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  letter-spacing: 0.02em;
+  position: relative; overflow: hidden;
+}
+.neurion-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  transition: left 0.5s;
+}
+.neurion-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.52), inset 0 1px 0 rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, var(--plan-color), #2563eb);
+}
+.neurion-btn-primary:hover::before { left: 100%; }
+.neurion-btn-primary:active { transform: translateY(0); }
+.neurion-btn-primary:disabled { opacity: 0.42; cursor: not-allowed; transform: none; }
+
+.neurion-btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(59,130,246,0.04);
+  color: var(--text-secondary);
+  font-weight: 600; font-size: 12px;
+  font-family: var(--font-sans);
+  cursor: pointer; transition: all 0.18s;
+}
+.neurion-btn-ghost:hover {
+  background: rgba(59,130,246,0.1);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  box-shadow: var(--glow-blue-sm);
+}
+
+/* ─── INPUTS ─────────────────────────────────────────────────────── */
+.neurion-input {
+  width: 100%; padding: 10px 14px;
+  background: rgba(6, 13, 26, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px; color: var(--text-primary);
+  font-size: 13px; outline: none;
+  font-family: var(--font-sans);
+  transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
+}
+.neurion-input:focus {
+  border-color: rgba(59,130,246,0.48);
+  background: rgba(6, 13, 26, 0.98);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1), var(--glow-blue-sm);
+}
+.neurion-input::placeholder { color: var(--text-muted); }
+
+.neurion-textarea {
+  width: 100%; padding: 12px 14px;
+  background: rgba(6, 13, 26, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px; color: var(--text-primary);
+  font-size: 13px; outline: none; resize: vertical;
+  font-family: var(--font-sans); line-height: 1.65;
+  transition: border-color 0.22s, box-shadow 0.22s;
+}
+.neurion-textarea:focus {
+  border-color: rgba(59,130,246,0.48);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1), var(--glow-blue-sm);
+}
+.neurion-textarea::placeholder { color: var(--text-muted); }
+
+/* ─── LABELS ─────────────────────────────────────────────────────── */
+.neurion-label {
+  display: block; font-size: 10px; font-weight: 700;
+  color: var(--text-muted); letter-spacing: 0.14em;
+  text-transform: uppercase; margin-bottom: 7px;
+  font-family: var(--font-display);
+}
+
+/* ─── SECTION TITLE ──────────────────────────────────────────────── */
+.neurion-section-title {
+  font-size: 9.5px; font-weight: 700;
+  color: var(--text-muted); letter-spacing: 0.22em;
+  text-transform: uppercase; padding: 0 4px;
+  margin-bottom: 7px;
+  font-family: var(--font-display);
+}
+
+/* ─── STATUS BADGES ──────────────────────────────────────────────── */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; font-family: var(--font-display); letter-spacing: 0.06em; }
+.badge-free     { background: rgba(42,72,117,0.2); color: #6da0d8; border: 1px solid rgba(59,130,246,0.15); }
+.badge-pro      { background: rgba(37,99,235,0.14); color: var(--blue-soft); border: 1px solid rgba(59,130,246,0.3); box-shadow: 0 0 12px rgba(59,130,246,0.1); }
+.badge-lifetime { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.28); box-shadow: 0 0 12px rgba(245,158,11,0.08); }
+
+/* ─── AGENT STATUS BAR ───────────────────────────────────────────── */
+.agent-status-bar {
+  background: linear-gradient(90deg, rgba(6,13,26,0.96), rgba(11,22,40,0.92), rgba(6,13,26,0.96));
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--glow-blue-sm), inset 0 1px 0 rgba(59,130,246,0.1);
+  position: relative; overflow: hidden;
+}
+.agent-status-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -200%; width: 200%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.05), transparent);
+  animation: statusSweep 2.8s linear infinite;
+}
+
+/* ─── LOGO BOX ───────────────────────────────────────────────────── */
+.neurion-logo-box {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--logo-glow, var(--plan-logo-glow)), rgba(6,182,212,0.08));
+  border: 1px solid var(--logo-color, var(--plan-logo-color));
+  border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  animation: logoPulse 3.5s ease-in-out infinite;
+  position: relative; overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 22px var(--logo-glow, var(--plan-logo-glow)), inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.neurion-logo-box::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+  border-radius: 10px;
+}
+
+/* ─── TABS CONTAINER ─────────────────────────────────────────────── */
+.tabs-container {
+  display: flex; align-items: center; gap: 2px;
+  background: rgba(4,9,15,0.75);
+  border: 1px solid rgba(59,130,246,0.1);
+  border-radius: 13px; padding: 4px;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(59,130,246,0.05), 0 4px 24px rgba(0,0,0,0.45);
+  overflow-x: auto; flex-shrink: 1;
+}
+.tabs-container::-webkit-scrollbar { display: none; }
+
+/* ─── ICON BUTTONS ───────────────────────────────────────────────── */
+.icon-btn {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: rgba(59,130,246,0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted); cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-btn:hover {
+  color: var(--blue-mid);
+  border-color: rgba(59,130,246,0.28);
+  background: rgba(59,130,246,0.12);
+  box-shadow: var(--glow-blue-sm);
+}
+.icon-btn.danger:hover {
+  color: #fda4af;
+  border-color: rgba(244,63,94,0.28);
+  background: rgba(244,63,94,0.1);
+  box-shadow: 0 0 12px rgba(244,63,94,0.18);
+}
+
+/* ─── EXPORT BUTTON ──────────────────────────────────────────────── */
+.export-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 15px;
+  background: linear-gradient(135deg, #1877F2, #1254c4);
+  color: #fff; font-weight: 700; font-size: 12px;
+  border: none; border-radius: 9px; cursor: pointer;
+  box-shadow: 0 2px 18px rgba(24,119,242,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: all 0.22s; position: relative; overflow: hidden;
+  letter-spacing: 0.02em;
+}
+.export-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 26px rgba(24,119,242,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.upgrade-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 13px;
+  border-radius: 9px;
+  border: 1px solid rgba(248,194,76,0.24);
+  background: linear-gradient(135deg, rgba(248,194,76,0.16), rgba(37,99,235,0.12));
+  color: #fde68a;
+  font-size: 11.5px; font-weight: 800;
+  font-family: var(--font-sans);
+  cursor: pointer; transition: all 0.2s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.upgrade-btn:hover {
+  color: #fff7d6;
+  border-color: rgba(248,194,76,0.48);
+  background: linear-gradient(135deg, rgba(248,194,76,0.24), rgba(37,99,235,0.18));
+  box-shadow: 0 0 20px rgba(248,194,76,0.16), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.export-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ─── VERSION BADGE ──────────────────────────────────────────────── */
+.version-badge {
+  font-size: 9px; font-weight: 700;
+  background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(34,211,238,0.1));
+  color: var(--blue-soft);
+  border: 1px solid rgba(59,130,246,0.28);
+  border-radius: 5px; padding: 2px 7px;
+  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  box-shadow: 0 0 10px rgba(59,130,246,0.14);
+}
+
+/* ─── SCROLLBAR HIDE ─────────────────────────────────────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── GRADIENT TEXT ──────────────────────────────────────────────── */
+.gradient-text-blue {
+  background: linear-gradient(135deg, var(--blue-soft) 0%, var(--blue-core) 50%, var(--cyan-bright) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 4.5s linear infinite;
+}
+.gradient-text-indigo {
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #22d3ee, #06b6d4);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── GLASS UTILS ────────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(11,22,40,0.7);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+/* ─── NOISE OVERLAY ──────────────────────────────────────────────── */
+.neurion-noise::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  opacity: 0.45; border-radius: inherit; z-index: 1;
+}
+
+/* ─── LEGACY NAV ITEM ────────────────────────────────────────────── */
+.neurion-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 10px;
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer; border: 1px solid transparent;
+  transition: all 0.18s; color: rgba(180, 210, 255, 0.55);
+  background: transparent; width: 100%;
+  text-align: left; position: relative;
+}
+.neurion-nav-item:hover { color: var(--text-secondary); background: rgba(59,130,246,0.06); }
+.neurion-nav-item.active { color: var(--blue-soft); background: rgba(59,130,246,0.1); border-color: var(--border-medium); box-shadow: var(--glow-blue-sm); }
+.neurion-nav-item .nav-dot { position: absolute; top: 8px; right: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-mid); animation: pulseDot 2s infinite; }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────── */
+@keyframes auroraDrift {
+  0%   { opacity: 0.8; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.85; }
+}
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 0.9; }
+}
+@keyframes tabUnderline {
+  0%, 100% { opacity: 0.45; transform: scaleX(0.65); }
+  50%      { opacity: 1; transform: scaleX(1); }
+}
+@keyframes tabDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.65); }
+}
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59,130,246,0.28), 0 0 40px rgba(37,99,235,0.1); }
+  50%      { box-shadow: 0 0 35px rgba(59,130,246,0.5), 0 0 70px rgba(37,99,235,0.2), 0 0 100px rgba(59,130,246,0.07); }
+}
+@keyframes textShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes borderFlow {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes statusSweep {
+  0%   { left: -200%; }
+  100% { left: 200%; }
+}
+@keyframes flowPulse {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+@keyframes spin       { to { transform: rotate(360deg); } }
+@keyframes pulseDot   { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes fade-in-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-in    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-in-left { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes animate-slide-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scanSweep {
+  0%   { top: 0%; opacity: 0; }
+  3%   { opacity: 1; }
+  97%  { opacity: 0.6; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes headerGlow {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+/* ─── ANIMATION CLASSES ──────────────────────────────────────────── */
+.animate-fade-in-up { animation: fade-in-up 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in    { animation: fade-in 0.3s ease both; }
+.animate-slide-left { animation: slide-in-left 0.3s ease both; }
+.animate-slide-in   { animation: animate-slide-in 0.35s ease both; }
+.tool-content       { animation: fade-in-up 0.38s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* ─── ORB FLOAT ANIMATIONS ───────────────────────────────────────── */
+@keyframes orbFloat1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, 30px) scale(1.08); }
+  66%  { transform: translate(-20px, 50px) scale(0.95); }
+  100% { transform: translate(10px, -10px) scale(1.03); }
+}
+@keyframes orbFloat2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  40%  { transform: translate(-50px, -30px) scale(1.06); }
+  75%  { transform: translate(30px, -50px) scale(0.93); }
+  100% { transform: translate(-10px, 15px) scale(1.02); }
+}
+
+/* ─── BORDER FLOW ANIMATION ──────────────────────────────────────── */
+@keyframes borderFlow {
+  0%   { transform: translateX(-100%); opacity: 0.6; }
+  50%  { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0.6; }
+}
+
+/* ─── SCAN SWEEP ─────────────────────────────────────────────────── */
+@keyframes scanSweep {
+  0%   { top: 0%; opacity: 0; }
+  4%   { opacity: 1; }
+  96%  { opacity: 0.5; }
+  100% { top: 100%; opacity: 0; }
+}

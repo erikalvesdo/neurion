@@ -1,0 +1,113 @@
+{
+  "name": "neurion-os",
+  "productName": "NEURION OS",
+  "private": true,
+  "version": "26.0.0",
+  "description": "NEURION OS — por GOAT",
+  "author": {
+    "name": "Erik Alves — GOAT"
+  },
+  "main": "electron/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "prebuild": "node electron/prepare-embed.cjs",
+    "dist": "npm run prebuild && npm run build && electron-builder --win --x64",
+    "dist:mac": "npm run build && electron-builder --mac"
+  },
+  "build": {
+    "appId": "os.neurion.goat",
+    "productName": "NEURION OS",
+    "copyright": "Copyright 2025 GOAT",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/main.js",
+      "electron/preload.js",
+      "electron/_bundled.js",
+      "node_modules/**/*",
+      "package.json",
+      "icon.ico",
+      "icon.png",
+      "!secrets",
+      "!secrets/**/*",
+      "!electron/prepare-embed.cjs"
+    ],
+    "extraResources": [
+      {
+        "from": "public",
+        "to": "public"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NEURION OS",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "differentialPackage": false
+    },
+    "mac": {
+      "icon": "icon.png",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "icon": "icon.png",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "publish": {
+      "provider": "generic",
+      "url": "https://firebasestorage.googleapis.com/v0/b/neurion-os.appspot.com/o/updates%2F"
+    }
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "fabric": "^7.2.0",
+    "firebase": "^10.12.0",
+    "framer-motion": "^12.34.3",
+    "idb": "^8.0.3",
+    "jspdf": "^4.2.0",
+    "jszip": "3.10.1",
+    "lucide-react": "^0.562.0",
+    "motion": "^12.38.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-markdown": "^9.0.1",
+    "recharts": "^3.6.0",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.14.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.1.2",
+    "electron": "^36.0.0",
+    "electron-builder": "24.13.3",
+    "electron-updater": "^6.3.9",
+    "tailwindcss": "^4.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0",
+    "wait-on": "^8.0.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Ads Optimizer OS",
+  "description": "Sistema de diagnóstico e otimização de anúncios baseado em fluxograma técnico de tráfego pago.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
